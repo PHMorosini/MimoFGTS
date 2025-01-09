@@ -13,11 +13,25 @@ builder.Services.AddSwaggerGen();
 
 //SERVICES
 builder.Services.AddScoped<ISaqueService, SaqueService>();
+//cors
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAnyOrigin", policy =>
+    {
+        policy.AllowAnyOrigin()  // Permite qualquer domínio
+              .AllowAnyHeader()  // Permite qualquer cabeçalho
+              .AllowAnyMethod(); // Permite qualquer método (GET, POST, etc.)
+    });
+});
+
 
 //MAPPERS
 builder.Services.AddAutoMapper(typeof(SaqueProfile).Assembly);
 
 var app = builder.Build();
+
+app.UseCors("AllowAnyOrigin");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
