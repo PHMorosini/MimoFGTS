@@ -8,7 +8,7 @@ namespace MimoFGTS.Content.Saque.Service
 {
     public class SaqueService : ISaqueService
     {
-        // Lista de faixas para o cálculo do saque aniversário
+        
 
         public async Task<Result<SaqueResponseDTO>> CalcularSaque(SaqueDTO saqueDTO)
         {
