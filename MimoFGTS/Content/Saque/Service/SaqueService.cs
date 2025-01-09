@@ -9,16 +9,6 @@ namespace MimoFGTS.Content.Saque.Service
     public class SaqueService : ISaqueService
     {
         // Lista de faixas para o cálculo do saque aniversário
-        private static readonly List<(decimal Limite, decimal Aliquota, decimal ParcelaAdicional)> TabelaAniversario = new()
-    {
-        (500, 0.50m, 0),
-        (1000, 0.40m, 50),
-        (5000, 0.30m, 150),
-        (10000, 0.20m, 650),
-        (15000, 0.15m, 1150),
-        (20000, 0.10m, 1900),
-        (decimal.MaxValue, 0.10m, 2900)
-    };
 
         public async Task<Result<SaqueResponseDTO>> CalcularSaque(SaqueDTO saqueDTO)
         {
@@ -56,7 +46,6 @@ namespace MimoFGTS.Content.Saque.Service
                     saldoAtualizado += somalancamentos;
                 }
 
-                // Tabela de faixas com limites, alíquotas e parcelas adicionais
                 var faixas = new List<(decimal Limite, decimal Aliquota, decimal ParcelaAdicional)>
         {
             (500, 0.50m, 0),
@@ -100,7 +89,7 @@ namespace MimoFGTS.Content.Saque.Service
                 if (saqueDTO != null)
                 {
                     decimal saldoFGTS = saqueDTO.SaldoFGTS;
-                    var saldoDisponivel = (saldoFGTS * 0.40m) + saldoFGTS; // 40% referente à multa rescisória
+                    var saldoDisponivel = (saldoFGTS * 0.40m) + saldoFGTS;
 
                     var newSaque = new SaqueResponseDTO
                     {
